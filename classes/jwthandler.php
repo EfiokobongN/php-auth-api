@@ -31,10 +31,18 @@
             return $this->jwt;
          }
 
-         public function jwtDecodeData($jwt_token){
-            try{
-               $decoode = JWT::decode($jwt_token, $this->jwt_secrect, array('HS256'));
-            };
-         }
+         public function jwtDecodeData($jwt_token)
+    {
+        try {
+            $decode = JWT::decode($jwt_token, $this->jwt_secrect, array('HS256'));
+            return [
+                "data" => $decode->data
+            ];
+        } catch (Exception $e) {
+            return [
+                "message" => $e->getMessage()
+            ];
+        }
+    }
     }
 ?>
